@@ -21,5 +21,5 @@ The rules for determining the FTLD-CDR global score are as follows. (Remember, i
   - A) If the maximum domain score is 1 and all other domains are 0, the FTLD-CDR global score is 0.5.
   - B) If the maximum domain score is 2 or 3 and all other domains are 0, the FTLD-CDR global score is 1.
   - C) If the maximum domain score occurs only once, and there is another score other than zero, the FTLD-CDR global score is one level lower than the level corresponding to the maximum impairment (for example, if the maximum = 2, and there is another score other than zero, the FTLD-CDR global score is 1; if the maximum = 1, and there is another score other than zero, the FTLD-CDR global score is 0.5).
-  - D)If the maximum domain score occurs more than once (for example, 1 in 2 domains, 2 in 2 domains), then the FTLD-CDR global score is that maximum domain score.
+  - D) If the maximum domain score occurs more than once (for example, 1 in 2 domains, 2 in 2 domains), then the FTLD-CDR global score is that maximum domain score.
 
