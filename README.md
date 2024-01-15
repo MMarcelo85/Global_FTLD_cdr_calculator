@@ -2,7 +2,7 @@
 
 ### Simple app to calculate FTLD-CDR Global for the ReDLat project
 
-[Click here to run it on streamlit](Not yet available)
+[Click here to run it on streamlit](https://global-ftld-cdr-calculator.streamlit.app/)
 
 #### FTLD-CDR Scoring Instructions.
 
