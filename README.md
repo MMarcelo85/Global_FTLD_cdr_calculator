@@ -8,15 +8,15 @@
 
 Two scores must be obtained:
 
-1. CDR Box Sum (automatically calculated in REDCap): Calculate the sum of values for all responses (including the two additional domains) and enter the total score in the provided space.
-2. Global CDR: derived from the scores in each of the eight categories ("box scores").
+- CDR Box Sum (automatically calculated in REDCap): Calculate the sum of values for all responses (including the two additional domains) and enter the total score in the provided space.
+- Global CDR: derived from the scores in each of the eight categories ("box scores").
 The rules for determining the FTLD-CDR global score are as follows. (Remember, it involves the eight domains or boxes):
 
-- 1) If all domains are 0, the FTLD-CDR global score is 0.
+1) If all domains are 0, the FTLD-CDR global score is 0.
 
-- 2) If the maximum domain score is 0.5, the FTLD-CDR global score is 0.5.
+2) If the maximum domain score is 0.5, the FTLD-CDR global score is 0.5.
 
-- 3)If the maximum domain score is greater than 0.5 in any domain, the following applies:
+3) If the maximum domain score is greater than 0.5 in any domain, the following applies:
 
   - A) If the maximum domain score is 1 and all other domains are 0, the FTLD-CDR global score is 0.5.
   - B) If the maximum domain score is 2 or 3 and all other domains are 0, the FTLD-CDR global score is 1.
