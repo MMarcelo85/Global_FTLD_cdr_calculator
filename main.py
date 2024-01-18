@@ -59,9 +59,12 @@ def calculate_cdr_FTD_inline(memory, secondary_categories):
         elif (domains.count(max_score) == 1) and ( (domains.count(0.5)>= 1) |  ((domains.count(1)>= 1) and max_score != 1) | ((domains.count(2)>= 1) and max_score != 2) | ((domains.count(3)>= 1) and max_score != 3) ):
             rule = rules["3c"]
             # print(max_score)
-            temp_serie = serie.drop(index=max_score, axis=0)
+            if max_score != 1:
+                return max_score - 1, rule
+            else:
+                return 0.5, rule
             
-            return temp_serie.index[-1], rule
+            # return temp_serie.index[-1], rule
         ## Rule 3.D
         ## if max(domain) is repeated , CDR =  max(domain)
         elif (domains.count(max_score) > 1):
@@ -125,9 +128,10 @@ def calculate_cdr_FTD(memory, secondary_categories):
         elif (domains.count(max_score) == 1) and ( (domains.count(0.5)>= 1) |  ((domains.count(1)>= 1) and max_score != 1) | ((domains.count(2)>= 1) and max_score != 2) | ((domains.count(3)>= 1) and max_score != 3) ):
             print("Rule 3B")
             print(max_score)
-            temp_serie = serie.drop(index=max_score, axis=0)
-            
-            return temp_serie.index[-1]
+            if max_score != 1:
+                return max_score - 1, rule
+            else:
+                return 0.5, rule
         ## Rule 3.D
         ## if max(domain) is repeated , CDR =  max(domain)
         elif (domains.count(max_score) > 1):
@@ -210,3 +214,4 @@ if uploaded_file:
         data=data_as_csv,
         file_name="Calculated_FTLD_CDR_global.csv",
         mime="text/plain")
+    
