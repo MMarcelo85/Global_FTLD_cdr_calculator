@@ -202,7 +202,7 @@ st.markdown(f"##### Applied rule:")
 st.write(f"{rule}")
 
 st.markdown("---")
-st.markdown(""" ##### Please, uploade your csv file yo have your cdr global calculated.
+st.markdown(""" ##### Please, upload your csv file yo have your cdr global calculated.
  First row must be columna names in this order: Memory, box1, box2, ..., box7.
  The programm returns the same csv with the FTLD_CDR_global column for each row""")
 
