@@ -23,11 +23,18 @@ def calculate_cdr_FTD_inline(memory, secondary_categories):
         "3b": "Rule 3 (If any domain >0.5) and B: if one domain is 2 or 3 and all other are 0, CDR = 1",
         "3c": "Rule 3 (If any domain >0.5) and C: if max(domain) is not repeated and there is another domain > 0 , CDR = one level below max(domain)",
         "3d":  "Rule 3 (If any domain >0.5) and D: if max(domain) is repeated , CDR =  max(domain)"
+        "Missing": "One ore more domains are missing"
     }
     domains = [memory] + secondary_categories
     max_score = np.max(domains)
     serie = pd.Series(domains).value_counts().sort_index()
     categories = list(serie.index)
+    
+    # Rule 0, if any domain is missing, don't calculate the CDR-FTLD score
+    if np.isnan(domains).any():
+        rule = rules['Missing']
+        return np.nan, rule
+    
     # Rule 1
     ## If all domains are 0, CDR = 0
     if max_score == 0:
@@ -47,28 +54,28 @@ def calculate_cdr_FTD_inline(memory, secondary_categories):
         ## Rule 3.A
         ## if one domain is 1 and all other are 0, CDR = 0.5
         if (domains.count(0) == 7) and (max_score == 1):
-            rule = rules["3a"]
+            rule = rules['3a']
             return 0.5, rule
         ## Rule 3.B
         ## if one domain is 2 or 3 and all other are 0, CDR = 1
         elif (domains.count(0) == 7) and ((max_score == 2) | (max_score == 3)):
-            rule = rules["3b"]
+            rule = rules['3b']
             return 1, rule
         ## Rule 3.C
         ## if max(domain) is not repeated and there is another domain > 0 , CDR = one level below max(domain)
         elif (domains.count(max_score) == 1) and ( (domains.count(0.5)>= 1) |  ((domains.count(1)>= 1) and max_score != 1) | ((domains.count(2)>= 1) and max_score != 2) | ((domains.count(3)>= 1) and max_score != 3) ):
-            rule = rules["3c"]
-            # print(max_score)
-            if max_score != 1:
+            # temp_serie = serie.drop(index=max_score, axis=0)
+            # return temp_serie.index[-1]
+            rule = rules['3c']
+            if max_score !=1:
                 return max_score - 1, rule
             else:
                 return 0.5, rule
-            
-            # return temp_serie.index[-1], rule
+        
         ## Rule 3.D
         ## if max(domain) is repeated , CDR =  max(domain)
         elif (domains.count(max_score) > 1):
-            rule = rules["3d"]
+            rule = rules['3d']
             return max_score, rule
         
 
@@ -93,20 +100,28 @@ def calculate_cdr_FTD(memory, secondary_categories):
         ## Rule 3.D
         ## if max(domain) is repeated , CDR =  max(domain)
       """
+    import numpy as np
+    import pandas as pd
     domains = [memory] + secondary_categories
     max_score = np.max(domains)
     serie = pd.Series(domains).value_counts().sort_index()
     categories = list(serie.index)
+    
+    # Rule 0, if any domain is missing, don't calculate the CDR-FTLD score
+    if np.isnan(domains).any():
+        print("One ore more domains are missing. Fill your NaNs and try again")
+        return np.nan
+    
     # Rule 1
     ## If all domains are 0, CDR = 0
     if max_score == 0:
-        print("Rule 1")
+        print('Rule 1')
         return 0
     
     # Rule 2
     ## If max(domains) == 0.5, CDR = 0.5
     if max_score == 0.5:
-        print("Rule 2")
+        print('Rule 2')
         return 0.5
     
     # Rule 3
@@ -116,26 +131,28 @@ def calculate_cdr_FTD(memory, secondary_categories):
         ## Rule 3.A
         ## if one domain is 1 and all other are 0, CDR = 0.5
         if (domains.count(0) == 7) and (max_score == 1):
-            print("Rule 3A")
+            print('Rule 3a')
             return 0.5
         ## Rule 3.B
         ## if one domain is 2 or 3 and all other are 0, CDR = 1
         elif (domains.count(0) == 7) and ((max_score == 2) | (max_score == 3)):
-            print("Rule 3B")
+            print("Rule 3b")
             return 1
         ## Rule 3.C
         ## if max(domain) is not repeated and there is another domain > 0 , CDR = one level below max(domain)
         elif (domains.count(max_score) == 1) and ( (domains.count(0.5)>= 1) |  ((domains.count(1)>= 1) and max_score != 1) | ((domains.count(2)>= 1) and max_score != 2) | ((domains.count(3)>= 1) and max_score != 3) ):
-            print("Rule 3B")
-            print(max_score)
-            if max_score != 1:
-                return max_score - 1, rule
+            # temp_serie = serie.drop(index=max_score, axis=0)
+            # return temp_serie.index[-1]
+            print("Rule 3c")
+            if max_score !=1:
+                return max_score - 1
             else:
-                return 0.5, rule
+                return 0.5
+        
         ## Rule 3.D
         ## if max(domain) is repeated , CDR =  max(domain)
         elif (domains.count(max_score) > 1):
-            print("Rule 3D")
+            print("Rule 3d")
             return max_score
         
 
