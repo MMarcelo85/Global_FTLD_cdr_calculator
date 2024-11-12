@@ -22,7 +22,7 @@ def calculate_cdr_FTD_inline(memory, secondary_categories):
         "3a": "Rule 3 (If any domain >0.5) and A: if one domain is 1 and all other are 0, CDR = 0.5",
         "3b": "Rule 3 (If any domain >0.5) and B: if one domain is 2 or 3 and all other are 0, CDR = 1",
         "3c": "Rule 3 (If any domain >0.5) and C: if max(domain) is not repeated and there is another domain > 0 , CDR = one level below max(domain)",
-        "3d":  "Rule 3 (If any domain >0.5) and D: if max(domain) is repeated , CDR =  max(domain)"
+        "3d":  "Rule 3 (If any domain >0.5) and D: if max(domain) is repeated , CDR =  max(domain)",
         "Missing": "One ore more domains are missing"
     }
     domains = [memory] + secondary_categories
