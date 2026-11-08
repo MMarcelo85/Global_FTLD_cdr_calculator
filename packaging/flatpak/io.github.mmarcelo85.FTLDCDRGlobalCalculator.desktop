@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=FTLD-CDR Global Calculator
+Comment=Calculate the FTLD-CDR Global from the eight FTLD-CDR boxes
+Exec=ftld-cdr-global-calculator
+Icon=io.github.mmarcelo85.FTLDCDRGlobalCalculator
+Categories=Science;MedicalSoftware;Education;
+Terminal=false

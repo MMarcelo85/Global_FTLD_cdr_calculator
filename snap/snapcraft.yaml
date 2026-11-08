@@ -1,0 +1,27 @@
+# Snap of the PyInstaller Linux executable (built by .github/workflows/build-desktop.yml).
+name: ftld-cdr-global-calculator
+base: core24
+version: '2.0.0'          # replaced by the git tag in the workflow
+summary: Calculate the FTLD-CDR Global from the eight FTLD-CDR boxes
+description: |
+  Scores the FTLD-CDR Global from the eight FTLD-CDR boxes (the six CDR domains plus
+  Behavior, Comportment and Personality, and Language), shows the rule applied, and
+  scores whole CSV files.
+grade: stable
+confinement: strict
+license: MIT
+platforms:
+  amd64:
+
+apps:
+  ftld-cdr-global-calculator:
+    command: bin/ftld-cdr-global-calculator
+    extensions: [gnome]   # X11/Wayland, fonts and theme setup
+    plugs: [home, removable-media]
+
+parts:
+  app:
+    plugin: nil
+    source: .
+    override-build: |
+      install -Dm755 dist/FTLD_CDR_Global_Calculator_Linux "$CRAFT_PART_INSTALL/bin/ftld-cdr-global-calculator"
