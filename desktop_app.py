@@ -12,7 +12,7 @@ from tkinter import filedialog, font as tkfont, messagebox, ttk
 import ftld_core
 
 APP_TITLE = "FTLD-CDR Global Calculator"
-APP_VERSION = "2.0.0"
+APP_VERSION = "2.0.1"
 AUTHOR = "Marcelo A. Maito"
 CONTACT = "mmaito@udesa.edu.ar"
 REPO_URL = "https://github.com/MMarcelo85/Global_FTLD_cdr_calculator"

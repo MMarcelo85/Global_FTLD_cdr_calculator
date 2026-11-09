@@ -1,7 +1,7 @@
 # Snap of the PyInstaller Linux executable (built by .github/workflows/build-desktop.yml).
 name: ftld-cdr-global-calculator
 base: core24
-version: '2.0.0'          # replaced by the git tag in the workflow
+version: '2.0.1'          # replaced by the git tag in the workflow
 summary: Calculate the FTLD-CDR Global from the eight FTLD-CDR boxes
 description: |
   Scores the FTLD-CDR Global from the eight FTLD-CDR boxes (the six CDR domains plus

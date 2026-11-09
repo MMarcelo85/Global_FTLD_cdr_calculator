@@ -79,7 +79,7 @@ Contact: mmaito@udesa.edu.ar · License: MIT (see `LICENSE`).
   runs it on the packaged executables, and also checks that the Windows and macOS apps start.
 * New version: update `APP_VERSION` in `desktop_app.py` and the `<release>` line in
   `packaging/flatpak/io.github.mmarcelo85.FTLDCDRGlobalCalculator.metainfo.xml`, commit, then push a tag
-  (`git tag -a v2.0.1 -m "v2.0.1" && git push origin v2.0.1`). GitHub Actions runs the tests, builds the
+  (`git tag -a v2.0.2 -m "v2.0.2" && git push origin v2.0.2`). GitHub Actions runs the tests, builds the
   Windows, Linux and macOS executables plus Flatpak and Snap, and attaches them to a Release whose text is
   `packaging/release_notes.md` (`.github/workflows/build-desktop.yml`).
 * Local build: `pyinstaller --onefile --windowed --name FTLD_CDR_Global_Calculator desktop_app.py`
