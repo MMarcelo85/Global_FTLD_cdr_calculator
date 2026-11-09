@@ -205,3 +205,47 @@ def process_csv(text):
     summary = (f"{n_ok} rows scored, {len(out_rows) - n_ok} rows with missing/invalid scores "
                f"(see {OUT_NOTE}). Columns used: {used}.")
     return out_header, out_rows, buf.getvalue(), summary
+
+
+# ---------------------------------------------------------------- self-test
+
+# One case per rule (checked against the full golden file by tests/test_ftld_core.py).
+SELF_TEST_CASES = [
+    ([0, 0, 0, 0, 0, 0, 0, 0], 0, "1"),
+    ([0.5, 0, 0, 0, 0, 0, 0.5, 0], 0.5, "2"),
+    ([0, 0, 0, 0, 0, 0, 1, 0], 0.5, "3a"),
+    ([0, 0, 0, 0, 0, 0, 0, 3], 1, "3b"),
+    ([3, 0.5, 0, 0, 0, 0, 0, 0], 2, "3c"),
+    ([0.5, 0, 0, 0, 0, 0, 1, 0], 0.5, "3c"),
+    ([1, 0, 0, 0, 0, 0, 1, 0], 1, "3d"),
+    ([3, 1, 1, 0, 0, 0, 2, 3], 3, "3d"),
+]
+
+
+def self_test():
+    """Quick check of scoring and CSV handling, used on the packaged executable
+    (desktop_app.py --self-test). Returns a list of failure messages (empty = OK)."""
+    failures = []
+    for scores, expected, rule in SELF_TEST_CASES:
+        got = calculate_ftld_cdr(scores)
+        if got != (expected, RULES[rule]):
+            failures.append(f"scores={scores}: got {got[0]} ({got[1][:8]}), expected {expected} (Rule {rule})")
+    for scores in ([0, 0, 0, 0, 0, 0.5, 0, 0], [9, 1, 0, 0, 0, 0, 0, 0]):
+        if validate(scores) is None:
+            failures.append(f"invalid scores accepted: {scores}")
+    checks = [
+        ("ID;Memoria;Orientación;Juicio;Comunidad;Hogar;Cuidado personal;Comportamiento;Lenguaje\n"
+         "A1;0,5;0;0;0;0;0;0;0\nA2;1;0;0;;0;0;0;0\n", ["0,5", ""]),
+        ("PTID\tMEMORY\tORIENT\tJUDGMENT\tCOMMUN\tHOMEHOBB\tPERSCARE\tCOMPORT\tCDRLANG\n"
+         "X\t0\t0\t0\t0\t0\t0\t2\t0\n", ["1"]),
+        ("Memory,box1,box2,box3,box4,box5,box6,box7\n3,0.5,0,0,0,0,0,0\n", ["2"]),
+    ]
+    for text, expected in checks:
+        try:
+            header, rows, _, _ = process_csv(text)
+            got = [r[header.index(OUT_SCORE)] for r in rows]
+        except ValueError as e:
+            got = str(e)
+        if got != expected:
+            failures.append(f"CSV {text.splitlines()[0][:30]}...: got {got}, expected {expected}")
+    return failures

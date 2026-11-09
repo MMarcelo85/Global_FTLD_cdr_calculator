@@ -41,6 +41,10 @@ class TestScoring(unittest.TestCase):
             self.assertEqual(ftld_core.calculate_ftld_cdr(scores), (expected, ftld_core.RULES[rule]),
                              msg=f"scores={scores}")
 
+    def test_self_test(self):
+        """The checks run on the packaged executable (desktop_app.py --self-test)."""
+        self.assertEqual(ftld_core.self_test(), [])
+
     def test_invalid_input(self):
         for scores in ([0, 0, 0, 0, 0, 0.5, 0, 0],   # personal care cannot be 0.5
                        [4, 0, 0, 0, 0, 0, 0, 0],     # out of range

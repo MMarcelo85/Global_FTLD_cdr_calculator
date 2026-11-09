@@ -211,6 +211,11 @@ def build_about_tab(parent):
 
 
 def main():
+    if "--self-test" in sys.argv:  # used by the build workflow on the packaged executable
+        failures = ftld_core.self_test()
+        print("\n".join(failures) or "Self-test OK")
+        sys.exit(1 if failures else 0)
+
     try:  # sharp text on high-DPI Windows screens
         import ctypes
         ctypes.windll.shcore.SetProcessDpiAwareness(1)
