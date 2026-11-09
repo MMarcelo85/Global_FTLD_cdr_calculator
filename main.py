@@ -63,3 +63,7 @@ if uploaded_file:
             data=out_csv.encode("utf-8-sig"),
             file_name=f"{name}_FTLD_CDR_global.csv",
             mime="text/csv")
+
+st.markdown("---")
+st.caption(f"{ftld_core.AUTHORSHIP} Source code and desktop version: "
+           "https://github.com/MMarcelo85/Global_FTLD_cdr_calculator")

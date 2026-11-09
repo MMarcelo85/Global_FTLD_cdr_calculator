@@ -6,6 +6,14 @@ and the desktop app (desktop_app.py), and packaged into a small executable.
 import csv
 import io
 
+# Same text in README.md (Authorship), the desktop About tab and the web app (checked by tests).
+AUTHORSHIP = (
+    "Created and maintained by Marcelo A. Maito: original app, implementation of the FTLD-CDR "
+    "scoring rules, testing, and all design decisions. Version 2.0 (shared scoring core, desktop "
+    "app, tests and build workflow) was developed with the assistance of Claude Code (Anthropic), "
+    "under the author's direction and review."
+)
+
 SCORES = (0, 0.5, 1, 2, 3)
 CARE_SCORES = (0, 1, 2, 3)  # Personal care cannot be scored 0.5
 LEVELS = SCORES             # "one level lower": 3 -> 2, 2 -> 1, 1 -> 0.5

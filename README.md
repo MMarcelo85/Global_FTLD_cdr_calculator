@@ -61,6 +61,14 @@ The rules for determining the FTLD-CDR global score are as follows (remember, th
    * C. If the maximum domain score occurs only once, and there is another score other than zero, the FTLD-CDR global score is one level lower than the level corresponding to the maximum impairment (for example, if the maximum = 2, and there is another score other than zero, the FTLD-CDR global score is 1; if the maximum = 1, and there is another score other than zero, the FTLD-CDR global score is 0.5).
    * D. If the maximum domain score occurs more than once (for example, 1 in 2 domains, 2 in 2 domains), then the FTLD-CDR global score is that maximum domain score.
 
+### Authorship
+
+Created and maintained by Marcelo A. Maito: original app, implementation of the FTLD-CDR scoring rules,
+testing, and all design decisions. Version 2.0 (shared scoring core, desktop app, tests and build workflow)
+was developed with the assistance of Claude Code (Anthropic), under the author's direction and review.
+
+Contact: mmaito@udesa.edu.ar · License: MIT (see `LICENSE`).
+
 ### Development
 
 * Tests: `python -m unittest discover -s tests` (includes all 312,500 possible score combinations,

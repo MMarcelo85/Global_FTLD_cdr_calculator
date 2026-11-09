@@ -197,6 +197,8 @@ def build_about_tab(parent):
                        "applied, and scores whole CSV files. The scoring rules are listed in the Rules tab.\n\n")
     text.insert("end", f"Author: {AUTHOR}\nContact: {CONTACT}\nSource code and downloads:\n")
     add_link(REPO_URL)
+    text.insert("end", "\nAuthorship:\n", "h")
+    text.insert("end", ftld_core.AUTHORSHIP + "\n")
     text.insert("end", "\nDisclaimer:\n", "h")
     text.insert("end", "This tool supports, but does not replace, clinical judgment. The FTLD-CDR Global must "
                        "be based on boxes scored by a trained rater. Please report any scoring error to "
